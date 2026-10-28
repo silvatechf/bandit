@@ -269,6 +269,7 @@ class BanditManager:
         if (
             len(self.files_list) > PROGRESS_THRESHOLD
             and LOG.getEffectiveLevel() <= logging.INFO
+            and not os.getenv("CI")
         ):
             files = progress.track(self.files_list)
         else:
