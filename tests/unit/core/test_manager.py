@@ -315,6 +315,21 @@ class ManagerTests(testtools.TestCase):
             # assert a SystemExit with code 2
             self.assertRaisesRegex(SystemExit, "2", self.manager.run_tests)
 
+    @mock.patch.dict(os.environ, {"CI": "true"})
+    def test_run_tests_disables_progress_in_ci(self):
+        temp_directory = self.useFixture(fixtures.TempDir()).path
+        self.manager.files_list = []
+        for index in range(manager.PROGRESS_THRESHOLD + 1):
+            path = os.path.join(temp_directory, f"file_{index}.py")
+            with open(path, "w") as fd:
+                fd.write("value = 1\\n")
+            self.manager.files_list.append(path)
+
+        with mock.patch("bandit.core.manager.progress.track") as progress_track:
+            self.manager.run_tests()
+
+        progress_track.assert_not_called()
+
     def test_run_tests_ioerror(self):
         # Test that a file name is skipped and added to the manager.skipped
         # list when there is an IOError attempting to open/read the file
