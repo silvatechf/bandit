@@ -339,9 +339,12 @@ class ManagerTests(testtools.TestCase):
             for index in range(manager.PROGRESS_THRESHOLD + 1)
         ]
 
-        with mock.patch(
-            "bandit.core.manager.progress.track", return_value=[]
-        ) as progress_track:
+        with (
+            mock.patch.object(manager.LOG, "getEffectiveLevel", return_value=20),
+            mock.patch(
+                "bandit.core.manager.progress.track", return_value=[]
+            ) as progress_track,
+        ):
             self.manager.run_tests()
 
         progress_track.assert_called_once_with(self.manager.files_list)
