@@ -22,6 +22,8 @@ def test_json_load():
     j = json.load("{}")
 
 yaml.load("{}", Loader=yaml.Loader)
+yaml.load("{}", Loader=yaml.CLoader)
+yaml.load("{}", Loader=yaml.UnsafeLoader)
 
 # no issue should be found
 yaml.load("{}", SafeLoader)
@@ -32,3 +34,7 @@ yaml.load("{}", BaseLoader)
 yaml.load("{}", yaml.BaseLoader)
 yaml.load("{}", CBaseLoader)
 yaml.load("{}", yaml.CBaseLoader)
+yaml.load("{}", Loader=BaseLoader)
+yaml.load("{}", Loader=yaml.BaseLoader)
+yaml.load("{}", Loader=CBaseLoader)
+yaml.load("{}", Loader=yaml.CBaseLoader)
