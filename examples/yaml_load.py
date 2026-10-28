@@ -1,5 +1,7 @@
 import json
 import yaml
+from yaml import BaseLoader
+from yaml import CBaseLoader
 from yaml import CSafeLoader
 from yaml import SafeLoader
 
@@ -26,3 +28,7 @@ yaml.load("{}", SafeLoader)
 yaml.load("{}", yaml.SafeLoader)
 yaml.load("{}", CSafeLoader)
 yaml.load("{}", yaml.CSafeLoader)
+yaml.load("{}", BaseLoader)
+yaml.load("{}", yaml.BaseLoader)
+yaml.load("{}", CBaseLoader)
+yaml.load("{}", yaml.CBaseLoader)
