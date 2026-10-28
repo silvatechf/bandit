@@ -325,7 +325,9 @@ class ManagerTests(testtools.TestCase):
                 fd.write("value = 1\n")
             self.manager.files_list.append(path)
 
-        with mock.patch("bandit.core.manager.progress.track") as progress_track:
+        with mock.patch(
+            "bandit.core.manager.progress.track"
+        ) as progress_track:
             self.manager.run_tests()
 
         progress_track.assert_not_called()
