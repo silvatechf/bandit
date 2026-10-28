@@ -322,7 +322,7 @@ class ManagerTests(testtools.TestCase):
         for index in range(manager.PROGRESS_THRESHOLD + 1):
             path = os.path.join(temp_directory, f"file_{index}.py")
             with open(path, "w") as fd:
-                fd.write("value = 1\\n")
+                fd.write("value = 1\n")
             self.manager.files_list.append(path)
 
         with mock.patch("bandit.core.manager.progress.track") as progress_track:
