@@ -332,6 +332,20 @@ class ManagerTests(testtools.TestCase):
 
         progress_track.assert_not_called()
 
+    @mock.patch.dict(os.environ, {"CI": ""})
+    def test_run_tests_keeps_progress_outside_ci(self):
+        self.manager.files_list = [
+            f"file_{index}.py"
+            for index in range(manager.PROGRESS_THRESHOLD + 1)
+        ]
+
+        with mock.patch(
+            "bandit.core.manager.progress.track", return_value=[]
+        ) as progress_track:
+            self.manager.run_tests()
+
+        progress_track.assert_called_once_with(self.manager.files_list)
+
     def test_run_tests_ioerror(self):
         # Test that a file name is skipped and added to the manager.skipped
         # list when there is an IOError attempting to open/read the file
