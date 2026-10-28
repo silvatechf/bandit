@@ -504,8 +504,8 @@ class FunctionalTests(testtools.TestCase):
     def test_yaml(self):
         """Test for `yaml.load`."""
         expect = {
-            "SEVERITY": {"UNDEFINED": 0, "LOW": 0, "MEDIUM": 2, "HIGH": 0},
-            "CONFIDENCE": {"UNDEFINED": 0, "LOW": 0, "MEDIUM": 0, "HIGH": 2},
+            "SEVERITY": {"UNDEFINED": 0, "LOW": 0, "MEDIUM": 4, "HIGH": 0},
+            "CONFIDENCE": {"UNDEFINED": 0, "LOW": 0, "MEDIUM": 0, "HIGH": 4},
         }
         self.check_example("yaml_load.py", expect)
 
